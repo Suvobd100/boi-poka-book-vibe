@@ -8,23 +8,8 @@ function BookDetail() {
   const data = useLoaderData();
   // console.log('from json',data[0].bookId,'from pram',bookId);
   const book = data.find((b) => b.bookId === id);
-  console.log(book);
-  // {
-  //     "bookId": 5,
-  //     "bookName": "Pride and Prejudice",
-  //     "author": "Jane Austen",
-  //     "image": "https://i.ibb.co.com/YdQDMpn/81me-ud-V63-L-AC-UF1000-1000-QL80.jpg",
-  //     "review": "'The Great Gatsby' by F. Scott Fitzgerald is a timeless masterpiece that delves into the decadence and disillusionment of the Jazz Age. Set in the Roaring Twenties, the novel unveils the enigmatic Jay Gatsby's extravagant parties, masking a pursuit of lost love. Narrated by Nick Carraway, the story explores themes of wealth, love, and the American Dream, drawing readers into a vivid portrayal of the glittering yet elusive world of the East and West Egg. Fitzgerald's prose is both poetic and haunting, weaving a compelling narrative that transcends its era. A poignant exploration of societal excess and the human condition, 'The Great Gatsby' remains a literary gem that resonates across generations.",
-  //     "totalPages": 279,
-  //     "rating": 4.7,
-  //     "category": "Classic",
-  //     "tags": [
-  //         "Romance",
-  //         "Satire"
-  //     ],
-  //     "publisher": "T. Egerton, Whitehall",
-  //     "yearOfPublishing": 1813
-  // }
+  // console.log(book);
+  
   const {
     bookId: currBokId,
     bookName,
@@ -38,30 +23,104 @@ function BookDetail() {
     publisher,
     yearOfPublishing,
   } = book;
+
+  // function mark as read
+  const handelRead = ()=>{
+
+
+
+  }
+
   return (
     <div>
       <h2>This is Book Detail: {bookId}</h2>
       <div className="grid lg:grid-cols-2 grid-cols-1 mb-4">
-                <div className="w-96 items-end p-5 bg-slate-300" >
-                     <img src={image} alt="book image" />
+        <div className="w-96 items-end p-5 bg-slate-300">
+          <img src={image} alt="book image" />
+        </div>
+        <div>
+          <h2 className="text-3xl font-bold">{bookName}</h2>
+          <p>By: {author}</p>
+          <p>
+            <div className="divider"></div>
+            <span className="font-bold text-xl">{category}</span>
+            <div className="divider"></div>
+          </p>
+          <div className="flex gap-2 p-4 mx-auto">
+            <span className="text-base text-gray-600 w-5/6">
+              <span className="font-bold text-lg leading-tight text-wrap ">
+                Review :
+              </span>
+              {review}
+            </span>
+          </div>
+          <div className="flex gap-3">
+            <span className="font-bold">Tag</span>
+
+            <span className="">
+              {tags.map((t, indx) => (
+                <button
+                  key={indx}
+                  className="btn btn-xs bg-green-200 text-green-800 mr-6"
+                >
+                  #{t}
+                </button>
+              ))}
+            </span>
+          </div>
+          <div className="divider"></div>
+                {/*For Heading cols*/}
+                <div className="flex gap-24">
+
+                <div className="grid grid-cols-1 gap-y-4">
+
+                  {/* Headings Column */}
+                  <div>
+                    <h3 className="font-bold">Number of Pages</h3>
+                  </div>
+                  <div>
+                    <h3 className="font-bold">Publisher</h3>
+                  </div>
+                  <div>
+                    <h3 className="font-bold">Year of Publishing</h3>
+                  </div>
+                  <div>
+                    <h3 className="font-bold">Rating</h3>
+                  </div>
+
+                  {/* Results Column */}
+                  
                 </div>
-                <div>
-                    <h2 className="text-3xl font-bold">
-                        {bookName}
-                    </h2>
-                    <p>By: {author}</p>
-                    <p>
-                    <div className="divider"></div>
-                        <span className="font-bold text-xl">{category}</span>
-                    <div className="divider"></div>
-                    </p>
-                    <p className="flex gap-2">
-                       <span className="text-base text-gray-600 w-4/6">
-                            <span className="font-bold text-lg leading-tight text-wrap">Review :</span> 
-                            {review}
-                        </span>
-                    </p>
+
+                {/* end Heading */}
+
+                {/* result start */}
+                  <div className="grid grid-cols-1 gap-y-4">
+                      <div>
+                        {totalPages}
+                      </div>
+                      <div>
+                        {publisher}
+                      </div>
+                      <div>
+                        {yearOfPublishing}
+                      </div>
+                      <div>
+                        {rating}
+                      </div>
+                    
+                  </div>
+
+
                 </div>
+
+                {/* result end */}
+
+                <div className="flex gap-6 mt-4">
+                    <button onClick={handelRead} className="btn btn-outline btn-accent">Read</button>
+                    <button className="btn bg-blue-400">Wishlist</button>
+                </div>
+        </div>
       </div>
     </div>
   );
